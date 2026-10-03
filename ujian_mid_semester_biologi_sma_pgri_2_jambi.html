@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian Mid Semester Biologi XI F1 - SMA PGRI 2 Jambi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+        }
+        /* Custom scrollbar for panel */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Announcement Banner -->
+    <div class="bg-amber-500 text-slate-900 font-medium px-4 py-2.5 text-sm shadow-md">
+        <div class="max-w-6xl mx-auto flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <i data-lucide="cloud-fog" class="w-5 h-5 flex-shrink-0 animate-pulse"></i>
+                <span><strong>Pemberitahuan Daring:</strong> Sehubungan dengan kabut asap di Kota Jambi, pembelajaran & Ujian Mid Semester SMA PGRI 2 Jambi dilaksanakan secara Online.</span>
+            </div>
+            <span class="hidden md:inline-block bg-amber-600 text-white text-xs px-2.5 py-1 rounded-full font-semibold">Daring Mode</span>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="bg-indigo-900 text-white border-b-4 border-indigo-500 shadow-lg sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-indigo-900 shadow-md font-bold text-xl">
+                    <i data-lucide="dna" class="w-7 h-7 text-indigo-700"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold leading-tight">SMA PGRI 2 JAMBI</h1>
+                    <p class="text-xs md:text-sm text-indigo-200">Mid Semester Genap - Biologi Kelas XI F1</p>
+                </div>
+            </div>
+            <div class="text-left md:text-right text-xs md:text-sm bg-indigo-950/60 p-2 rounded-lg border border-indigo-800">
+                <p class="text-indigo-300 font-medium">Guru Pengampu:</p>
+                <p class="font-bold text-white flex items-center gap-1">
+                    <i data-lucide="user-check" class="w-4 h-4 text-emerald-400"></i>
+                    Reri Petra Nanda, M.Pd., Gr.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-3 md:px-6 py-6 flex-grow w-full">
+        
+        <!-- SECTION 1: Identity Form (Shown initialy) -->
+        <div id="section-identity" class="max-w-xl mx-auto bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden transition-all duration-300">
+            <div class="bg-gradient-to-r from-indigo-600 to-blue-600 p-6 text-white text-center">
+                <i data-lucide="file-signature" class="w-12 h-12 mx-auto mb-2 opacity-90"></i>
+                <h2 class="text-2xl font-bold">Formulir Peserta Ujian</h2>
+                <p class="text-indigo-100 text-sm mt-1">Silakan isi identitas diri Anda dengan benar sebelum memulai ujian.</p>
+            </div>
+            
+            <form id="form-start-exam" onsubmit="startExam(event)" class="p-6 space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Nama Lengkap Siswa <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <i data-lucide="user" class="w-5 h-5 absolute left-3 top-3 text-slate-400"></i>
+                        <input type="text" id="student-name" required placeholder="Contoh: Ahmad Rizky" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Kelas <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <i data-lucide="graduation-cap" class="w-5 h-5 absolute left-3 top-3 text-slate-400"></i>
+                        <input type="text" id="student-class" value="XI F1" required readonly class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-600 font-semibold text-sm cursor-not-allowed">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1">Motto Hidup / Pesan Motivasi <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <i data-lucide="quote" class="w-5 h-5 absolute left-3 top-3 text-slate-400"></i>
+                        <input type="text" id="student-motto" required placeholder="Contoh: Belajar hari ini untuk masa depan yang gemilang" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+                    </div>
+                </div>
+
+                <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-900 space-y-1">
+                    <p class="font-bold flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-indigo-600"></i> Informasi Ujian:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-1 text-slate-700">
+                        <li>Jumlah Soal: <strong>25 Soal HOTS</strong> Pilihan Ganda (A-E)</li>
+                        <li>Waktu Pengerjaan: <strong>60 Menit</strong></li>
+                        <li>Bobot per Soal: <strong>4 Poin</strong> (Total Skor Max: 100)</li>
+                        <li>Hasil Nilai: Dikirim otomatis ke WhatsApp Guru Mapel.</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2 text-base">
+                    <i data-lucide="play-circle" class="w-5 h-5"></i>
+                    Mulai Ujian Sekarang
+                </button>
+            </form>
+        </div>
+
+        <!-- SECTION 2: Exam Environment (Hidden initially) -->
+        <div id="section-exam" class="hidden">
+            <!-- Top Controls Bar (Timer & Quick Summary) -->
+            <div class="bg-white rounded-2xl p-4 shadow-md border border-slate-200 mb-6 flex flex-wrap items-center justify-between gap-4 sticky top-16 z-20">
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 bg-indigo-100 text-indigo-700 rounded-xl">
+                        <i data-lucide="user-check" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-medium">Peserta Ujian:</div>
+                        <div id="display-student-name" class="font-bold text-slate-800 text-sm md:text-base">Ahmad Rizky (XI F1)</div>
+                    </div>
+                </div>
+
+                <!-- Floating/Fixed Timer Block -->
+                <div class="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-xl shadow border border-slate-800">
+                    <i data-lucide="timer" class="w-5 h-5 text-amber-400 animate-spin" style="animation-duration: 8s;"></i>
+                    <span class="text-xs text-slate-300 font-medium">Sisa Waktu:</span>
+                    <span id="timer-display" class="font-mono text-lg font-bold text-amber-400">60:00</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Question View Column (3/4 on large screen) -->
+                <div class="lg:col-span-3 space-y-6">
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-5 md:p-7 relative">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+                            <span class="bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded-lg text-sm flex items-center gap-1.5">
+                                <i data-lucide="help-circle" class="w-4 h-4"></i>
+                                Soal No. <span id="current-q-num">1</span> dari 25
+                            </span>
+                            <span id="topic-badge" class="text-xs font-semibold bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full border border-slate-200">
+                                Kategori
+                            </span>
+                        </div>
+
+                        <!-- Question Text -->
+                        <div id="question-text" class="text-slate-800 font-medium text-base md:text-lg leading-relaxed mb-6">
+                            Loading pertanyaan...
+                        </div>
+
+                        <!-- Options List -->
+                        <div id="options-container" class="space-y-3">
+                            <!-- Options will be dynamically rendered -->
+                        </div>
+
+                        <!-- Navigation Bottom Buttons -->
+                        <div class="flex items-center justify-between pt-6 mt-8 border-t border-slate-100">
+                            <button id="btn-prev" onclick="navigateQuestion(-1)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm flex items-center gap-1.5 transition disabled:opacity-40 disabled:cursor-not-allowed">
+                                <i data-lucide="chevron-left" class="w-4 h-4"></i> Sebelumnya
+                            </button>
+
+                            <button id="btn-next" onclick="navigateQuestion(1)" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-sm flex items-center gap-1.5 transition shadow">
+                                Selanjutnya <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Side Panel (1/4 on large screen) -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-5 sticky top-36">
+                        <h3 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+                            <i data-lucide="layout-grid" class="w-4 h-4 text-indigo-600"></i>
+                            Navigasi Soal
+                        </h3>
+
+                        <!-- Color Indicator Legend -->
+                        <div class="grid grid-cols-3 gap-1 mb-4 text-[11px] text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                            <div class="flex items-center gap-1">
+                                <span class="w-3 h-3 rounded-full bg-slate-200 border border-slate-300 inline-block"></span> Belum
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> Dijawab
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span class="w-3 h-3 rounded-full bg-indigo-600 inline-block"></span> Aktif
+                            </div>
+                        </div>
+
+                        <!-- Question Grid (1-25) -->
+                        <div id="navigation-grid" class="grid grid-cols-5 gap-2 max-h-64 lg:max-h-none overflow-y-auto custom-scrollbar p-1">
+                            <!-- Dynamically generated buttons 1-25 -->
+                        </div>
+
+                        <!-- Finish Button -->
+                        <button onclick="confirmSubmitExam()" class="w-full mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                            Selesaikan Ujian
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SECTION 3: Result Recap Modal (Hidden initially) -->
+    <div id="modal-result" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden transform transition-all my-8">
+            <div class="bg-gradient-to-r from-indigo-700 via-indigo-800 to-blue-900 p-6 text-white text-center relative">
+                <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 border border-white/20">
+                    <i data-lucide="award" class="w-10 h-10 text-amber-400"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold">Hasil Mid Semester</h2>
+                <p class="text-indigo-200 text-xs mt-1">Biologi XI F1 - SMA PGRI 2 Jambi</p>
+            </div>
+
+            <div class="p-6 space-y-5">
+                <!-- Score Card Box -->
+                <div class="bg-slate-50 border-2 border-indigo-100 rounded-2xl p-4 text-center">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Nilai Akhir Anda</span>
+                    <div id="modal-score" class="text-5xl font-extrabold text-indigo-700 my-1">0</div>
+                    <div id="modal-score-status" class="text-xs font-semibold px-3 py-1 rounded-full inline-block bg-indigo-100 text-indigo-800">
+                        Total Poin dari 100 Maksimal
+                    </div>
+                </div>
+
+                <!-- Detail Recap Table -->
+                <div class="bg-slate-50 rounded-xl p-4 text-xs space-y-2.5 border border-slate-200">
+                    <div class="flex justify-between border-b pb-2 border-slate-200">
+                        <span class="text-slate-500">Nama Lengkap:</span>
+                        <span id="modal-student-name" class="font-bold text-slate-800"></span>
+                    </div>
+                    <div class="flex justify-between border-b pb-2 border-slate-200">
+                        <span class="text-slate-500">Kelas:</span>
+                        <span id="modal-student-class" class="font-bold text-slate-800">XI F1</span>
+                    </div>
+                    <div class="flex justify-between border-b pb-2 border-slate-200">
+                        <span class="text-slate-500">Motto Hidup:</span>
+                        <span id="modal-student-motto" class="font-medium text-slate-700 italic max-w-[200px] truncate"></span>
+                    </div>
+                    <div class="flex justify-between border-b pb-2 border-slate-200">
+                        <span class="text-slate-500">Jawaban Benar:</span>
+                        <span id="modal-correct-count" class="font-bold text-emerald-600">0 Soal</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">Jawaban Salah / Kosong:</span>
+                        <span id="modal-wrong-count" class="font-bold text-rose-600">0 Soal</span>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex items-start gap-2">
+                    <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5"></i>
+                    <span>Sesuai instruksi, Anda wajib mengirimkan hasil nilai ini ke WhatsApp Guru Pengampu (<strong>Bpk. Reri Petra Nanda, M.Pd., Gr.</strong>).</span>
+                </div>
+
+                <!-- WA Send Button -->
+                <button onclick="sendToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                    <i data-lucide="message-square" class="w-5 h-5 fill-current"></i>
+                    Kirim Nilai ke WA Guru (085377704248)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-4 text-center border-t border-slate-800 mt-auto">
+        <p>© 2026 SMA PGRI 2 Jambi • Ujian Mid Semester Online Biologi Kelas XI F1</p>
+    </footer>
+
+    <script>
+        // 25 HOTS Questions covering the 5 specified biology topics
+        const questionsData = [
+            // Topik 1: Struktur Sel
+            {
+                id: 1,
+                topic: "Struktur Sel",
+                question: "Seorang peneliti mengamati sel Tumbuhan dan sel Hewan menggunakan mikroskop elektron berkekuatan tinggi. Ia menemukan organel berekskresi khusus yang dikelilingi membran tunggal, kaya akan enzim katalase yang berfungsi menetralkan racun H₂O₂ hasil metabolisme. Organel yang dimaksud adalah...",
+                options: [
+                    "A. Lisosom",
+                    "B. Peroksisom",
+                    "C. Ribosom",
+                    "D. Badan Golgi",
+                    "E. Vakuola"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 2,
+                topic: "Struktur Sel",
+                question: "Di bawah mikroskop elektron, terlihat suatu organel bermembran ganda. Membran dalamnya membentuk lipatan-lipatan (krista) yang memperluas permukaan sintesis ATP. Jika organel ini mengalami kerusakan fatal akibat radikal bebas, efek langsung terhadap sel adalah...",
+                options: [
+                    "A. Kegagalan proses pembelahan sel",
+                    "B. Terhentinya respirasi seluler dan krisis energi (ATP)",
+                    "C. Terhentinya ekskresi protein keluar sel",
+                    "D. Kebocoran asam amino dari dalam sel",
+                    "E. Kegagalan pembentukan dinding sel baru"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 3,
+                topic: "Struktur Sel",
+                question: "Komponen sitoskelet berupa serat protein halus tersusun atas aktin yang berperan penting dalam gerak pseudopodia pada Amoeba serta proses sitokinesis (pembelahan sitoplasma) sel hewan adalah...",
+                options: [
+                    "A. Mikrotubulus",
+                    "B. Filamen Intermediet",
+                    "C. Mikrofilamen",
+                    "D. Sentriol",
+                    "E. Mikrofibril"
+                ],
+                answer: 2 // C
+            },
+            {
+                id: 4,
+                topic: "Struktur Sel",
+                question: "Seseorang menderita penyakit genetik langka di mana sel-sel tubuhnya tidak mampu mencerna organel yang telah rusak (autofagi). Organel sel manakah yang paling mungkin mengalami disfungsi genetik tersebut?",
+                options: [
+                    "A. Ribosom",
+                    "B. Kompleks Golgi",
+                    "C. Retikulum Endoplasma Halus",
+                    "D. Lisosom",
+                    "E. Plastida"
+                ],
+                answer: 3 // D
+            },
+            {
+                id: 5,
+                topic: "Struktur Sel",
+                question: "Pernyataan berikut yang membedakan struktur utama antara sel Prokariotik (seperti bakteri) dan sel Eukariotik (seperti sel tumbuhan) secara tepat adalah...",
+                options: [
+                    "A. Sel prokariotik memiliki membran inti, sedangkan eukariotik tidak",
+                    "B. Sel eukariotik memiliki organel bermembran, sedangkan prokariotik tidak",
+                    "C. Sel prokariotik tidak memiliki materi genetik DNA",
+                    "D. Sel eukariotik tidak memiliki ribosom untuk sintesis protein",
+                    "E. Sel prokariotik memiliki mitokondria untuk pembentukan energi"
+                ],
+                answer: 1 // B
+            },
+
+            // Topik 2: Keterkaitan Antara Struktur Sel dan Fungsi Sel
+            {
+                id: 6,
+                topic: "Struktur & Fungsi Sel",
+                question: "Sel pankreas manusia sangat aktif memproduksi dan mengekresikan enzim-enzim pencernaan (protein). Berdasarkan fungsinya, sel pankreas akan memiliki keterkaitan struktur dengan melimpahnya organel...",
+                options: [
+                    "A. Retikulum Endoplasma Kasar dan Badan Golgi",
+                    "B. Retikulum Endoplasma Halus dan Lisosom",
+                    "C. Mitokondria dan Sentrosom",
+                    "D. Peroksisom dan Vakuola",
+                    "E. Plastida dan Mikrofilamen"
+                ],
+                answer: 0 // A
+            },
+            {
+                id: 7,
+                topic: "Struktur & Fungsi Sel",
+                question: "Sel-sel pada organ hati (hepar) bertugas menetralkan racun (detoksifikasi) obat-obatan dan alkohol. Struktur organel sel hati yang beradaptasi secara khusus untuk menjalankan fungsi detoksifikasi tersebut adalah...",
+                options: [
+                    "A. Retikulum Endoplasma Kasar",
+                    "B. Retikulum Endoplasma Halus",
+                    "C. Ribosom Bebas",
+                    "D. Nukleolus",
+                    "E. Sentriol"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 8,
+                topic: "Struktur & Fungsi Sel",
+                question: "Sel otot rangka memerlukan energi mekanik yang sangat tinggi dan terus-menerus untuk kontraksi. Keterkaitan struktur yang paling menonjol pada sel otot rangka adalah tingginya kepadatan...",
+                options: [
+                    "A. Kloroplas",
+                    "B. Badan Golgi",
+                    "C. Mitokondria",
+                    "D. Lisosom",
+                    "E. Mikrotubulus"
+                ],
+                answer: 2 // C
+            },
+            {
+                id: 9,
+                topic: "Struktur & Fungsi Sel",
+                question: "Sel parenkim palisade pada daun tumbuhan memiliki struktur kloroplas yang sangat melimpah dan terletak berdekatan dengan permukaan atas daun. Adaptasi struktur ini mendukung fungsi utama sel yaitu...",
+                options: [
+                    "A. Menyimpan cadangan air",
+                    "B. Maksimalkan penyerapan cahaya untuk fotosintesis",
+                    "C. Mengangkut hasil fotosintesis ke seluruh tubuh",
+                    "D. Memperkuat jaringan mekanik daun",
+                    "E. Menyerap oksigen untuk respirasi malam hari"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 10,
+                topic: "Struktur & Fungsi Sel",
+                question: "Sel epitel usus halus memiliki modifikasi membran sel berupa lipatan-lipatan mikrovili di permukaan luarnya. Hubungan antara struktur mikrovili ini dengan fungsi organ pencernaan adalah...",
+                options: [
+                    "A. Memperluas bidang permukaan penyerapan nutrisi",
+                    "B. Membantu pergerakan makanan di sepanjang usus",
+                    "C. Mencegah zat beracun masuk ke dalam darah",
+                    "D. Memproduksi asam lambung secara efisien",
+                    "E. Melindungi sel dari gesekan makanan kasar"
+                ],
+                answer: 0 // A
+            },
+
+            // Topik 3: Komposisi Sel (Biokimia)
+            {
+                id: 11,
+                topic: "Komposisi Sel",
+                question: "Membran sel tersusun atas lapisan ganda fosfolipid (phospholipid bilayer). Bagian kepala fosfolipid bersifat hidrofilik sedangkan bagian ekor bersifat hidrofobik. Sifat komposisi ini menyebabkan membran sel bersifat...",
+                options: [
+                    "A. Impermeabel total",
+                    "B. Semipermeabel / Selektif Permeabel",
+                    "C. Permeabel bebas terhadap semua zat",
+                    "D. Kaku dan mudah pecah",
+                    "E. Larut sepenuhnya dalam air"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 12,
+                topic: "Komposisi Sel",
+                question: "Seorang siswa melakukan analisis unsur kimiawi pembentuk protoplasma. Unsur makro utama yang menyusun hampir 96% dari total massa tubuh dan sel makhluk hidup adalah...",
+                options: [
+                    "A. Karbon (C), Hidrogen (H), Oksigen (O), dan Nitrogen (N)",
+                    "B. Natrium (Na), Kalium (K), Kalsium (Ca), dan Klor (Cl)",
+                    "C. Besi (Fe), Seng (Zn), Tembaga (Cu), dan Magnesium (Mg)",
+                    "D. Karbon (C), Belerang (S), Fosfor (P), dan Besi (Fe)",
+                    "E. Oksigen (O), Natrium (Na), Fluor (F), dan Kalsium (Ca)"
+                ],
+                answer: 0 // A
+            },
+            {
+                id: 13,
+                topic: "Komposisi Sel",
+                question: "Karbohidrat yang tersusun atas rantai glukosa panjang dan menjadi komponen struktural utama pembentuk dinding sel pada tumbuhan adalah...",
+                options: [
+                    "A. Glikogen",
+                    "B. Amilum",
+                    "C. Selulosa",
+                    "D. Kitin",
+                    "E. Sukrosa"
+                ],
+                answer: 2 // C
+            },
+            {
+                id: 14,
+                topic: "Komposisi Sel",
+                question: "Asam nukleat (DNA dan RNA) merupakan makromolekul penting dalam sel. Monomer penyusun asam nukleat yang terdiri dari gugus fosfat, gula pentosa, dan basa nitrogen disebut...",
+                options: [
+                    "A. Asam Amino",
+                    "B. Nukleosida",
+                    "C. Nukleotida",
+                    "D. Trigliserida",
+                    "E. Polipeptida"
+                ],
+                answer: 2 // C
+            },
+            {
+                id: 15,
+                topic: "Komposisi Sel",
+                question: "Senyawa anorganik terbanyak di dalam protoplasma sel (sekitar 70-80%) yang berfungsi sebagai pelarut universal dan medium reaksi kimia metabolisme adalah...",
+                options: [
+                    "A. Garam Mineral",
+                    "B. Air (H₂O)",
+                    "C. Gas Oksigen",
+                    "D. Vitamin C",
+                    "E. Asam Lemak"
+                ],
+                answer: 1 // B
+            },
+
+            // Topik 4: Transport Pasif
+            {
+                id: 16,
+                topic: "Transport Pasif",
+                question: "Sel darah merah (eritrosit) dimasukkan ke dalam akuades (larutan hipotonis murni). Beberepa menit kemudian sel pecah (hemolisis). Peristiwa ini terjadi karena...",
+                options: [
+                    "A. Air keluar dari sel secara difusi terfasilitasi",
+                    "B. Air masuk ke dalam sel secara osmosis hingga membran sel pecah",
+                    "C. Garam keluar dari sel secara transport aktif",
+                    "D. Molekul glukosa dipompa masuk ke dalam sel",
+                    "E. Dinding sel darah merah tidak kuat menahan tekanan turgor"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 17,
+                topic: "Komposisi & Transport Pasif",
+                question: "Potongan kentang dimasukkan ke dalam larutan gula pekat (hipertonis) selama 1 jam. Setelah ditimbang, berat potongan kentang berkurang signifikan dan teksturnya menjadi lembek. Fenomena yang terjadi pada sel kentang tersebut dinamakan...",
+                options: [
+                    "A. Turgiditas",
+                    "B. Hemolisis",
+                    "C. Plasmolisis",
+                    "D. Endositosis",
+                    "E. Kremasi"
+                ],
+                answer: 2 // C
+            },
+            {
+                id: 18,
+                topic: "Transport Pasif",
+                question: "Proses perpindahan zat terlarut (seperti parfum yang menyebar di dalam ruangan atau zat warna dalam air) dari konsentrasi tinggi (hipertonis) ke konsentrasi rendah (hipotonis) tanpa memerlukan energi ATP disebut...",
+                options: [
+                    "A. Osmosis",
+                    "B. Difusi Sederhana",
+                    "C. Eksositosis",
+                    "D. Pompa Ion",
+                    "E. Kotranspor"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 19,
+                topic: "Transport Pasif",
+                question: "Molekul polar berukuran besar seperti Glukosa dan Asam Amino tidak dapat menembus fosfolipid membran secara langsung, namun dapat masuk ke dalam sel mengikuti gradien konsentrasi dengan bantuan protein transpor. Proses ini disebut...",
+                options: [
+                    "A. Difusi Terfasilitasi",
+                    "B. Endositosis Terperantara Reseptor",
+                    "C. Pompa Natrium-Kalium",
+                    "D. Pinositosis",
+                    "E. Dialisis"
+                ],
+                answer: 0 // A
+            },
+            {
+                id: 20,
+                topic: "Transport Pasif",
+                question: "Sel tumbuhan yang berada dalam lingkungan larutan hipotonis akan menyerap air hingga sel mengembang kencang namun tidak pecah karena tertahan oleh dinding sel. Kondisi sel tumbuhan yang tegang ini disebut...",
+                options: [
+                    "A. Plasmolisis",
+                    "B. Flasid",
+                    "C. Turgor / Turgid",
+                    "D. Lisis",
+                    "E. Kremasi"
+                ],
+                answer: 2 // C
+            },
+
+            // Topik 5: Transport Aktif
+            {
+                id: 21,
+                topic: "Transport Aktif",
+                question: "Mekanisme pompa ion Na⁺/K⁺ pada membran sel saraf membutuhkan energi ATP untuk memindahkan ion melawan gradien konsentrasi. Jumlah ion yang dipompa dalam satu siklus adalah...",
+                options: [
+                    "A. 3 ion Na⁺ keluar dan 2 ion K⁺ masuk ke dalam sel",
+                    "B. 2 ion Na⁺ keluar dan 3 ion K⁺ masuk ke dalam sel",
+                    "C. 3 ion Na⁺ masuk dan 3 ion K⁺ keluar sel",
+                    "D. 2 ion Na⁺ masuk dan 2 ion K⁺ keluar sel",
+                    "E. 1 ion Na⁺ keluar dan 1 ion K⁺ masuk sel"
+                ],
+                answer: 0 // A
+            },
+            {
+                id: 22,
+                topic: "Transport Aktif",
+                question: "Sel darah putih (leukosit) menelan bakteri patogen yang masuk ke dalam tubuh dengan cara membentuk lekukan membran sel hingga membungkus bakteri dalam vakuola fagosit. Mekanisme transport aktif ini disebut...",
+                options: [
+                    "A. Pinositosis",
+                    "B. Fagositosis (Endositosis)",
+                    "C. Eksositosis",
+                    "D. Osmosis terbalik",
+                    "E. Kotranspor"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 23,
+                topic: "Transport Aktif",
+                question: "Sel-sel kelenjar ludah mengekresikan enzim amilase dalam kantong vesikula yang berfusi dengan membran plasma untuk dilepaskan ke luar sel. Peristiwa pengeluaran zat dari dalam sel ini dinamakan...",
+                options: [
+                    "A. Eksositosis",
+                    "B. Endositosis",
+                    "C. Plasmolisis",
+                    "D. Difusi",
+                    "E. Dialisis"
+                ],
+                answer: 0 // A
+            },
+            {
+                id: 24,
+                topic: "Transport Aktif",
+                question: "Transport aktif yang terjadi ketika pemompaan suatu zat terlarut secara tidak langsung memicu transpor zat terlarut lainnya melawan gradien konsentrasi (seperti transpor simpor glukosa bersamaan dengan Na⁺) disebut...",
+                options: [
+                    "A. Pompa Proton",
+                    "B. Kotranspor (Cotransport)",
+                    "C. Pinositosis",
+                    "D. Difusi Terfasilitasi",
+                    "E. Osmosis"
+                ],
+                answer: 1 // B
+            },
+            {
+                id: 25,
+                topic: "Transport Aktif",
+                question: "Proses penyerapan cairan seluler berukuran mikroskopis oleh sel melalui pembentukan vesikula kecil (dikenal sebagai 'sel minum') disebut...",
+                options: [
+                    "A. Fagositosis",
+                    "B. Pinositosis",
+                    "C. Eksositosis",
+                    "D. Plasmolisis",
+                    "E. Turgor"
+                ],
+                answer: 1 // B
+            }
+        ];
+
+        // Application State
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questionsData.length).fill(null);
+        let studentData = { name: '', class: 'XI F1', motto: '' };
+        let timerSeconds = 60 * 60; // 60 minutes
+        let timerInterval = null;
+        let examSubmitted = false;
+
+        window.onload = function() {
+            lucide.createIcons();
+        };
+
+        // Function to Start Exam
+        function startExam(event) {
+            event.preventDefault();
+            
+            const nameInput = document.getElementById('student-name').value.trim();
+            const mottoInput = document.getElementById('student-motto').value.trim();
+
+            if (!nameInput || !mottoInput) {
+                alert("Harap isi Nama dan Motto terlebih dahulu!");
+                return;
+            }
+
+            studentData.name = nameInput;
+            studentData.motto = mottoInput;
+
+            // Update UI with student info
+            document.getElementById('display-student-name').innerText = `${studentData.name} (${studentData.class})`;
+
+            // Switch view
+            document.getElementById('section-identity').classList.add('hidden');
+            document.getElementById('section-exam').classList.remove('hidden');
+
+            // Render Nav Grid & Render First Question
+            renderNavigationGrid();
+            loadQuestion(0);
+
+            // Start Timer
+            startTimer();
+
+            // Refresh icons inside rendered elements
+            lucide.createIcons();
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timerSeconds--;
+
+                const minutes = Math.floor(timerSeconds / 60);
+                const seconds = timerSeconds % 60;
+
+                const formattedMin = String(minutes).padStart(2, '0');
+                const formattedSec = String(seconds).padStart(2, '0');
+
+                document.getElementById('timer-display').innerText = `${formattedMin}:${formattedSec}`;
+
+                // Warning color on low time
+                if (timerSeconds <= 300) { // < 5 minutes
+                    document.getElementById('timer-display').classList.remove('text-amber-400');
+                    document.getElementById('timer-display').classList.add('text-rose-500', 'animate-pulse');
+                }
+
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Waktu ujian telah habis! Sistem akan otomatis mengumpulkan ujian Anda.");
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionsData[index];
+
+            document.getElementById('current-q-num').innerText = index + 1;
+            document.getElementById('topic-badge').innerText = q.topic;
+            document.getElementById('question-text').innerText = q.question;
+
+            // Render Options
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.options.forEach((optText, optIdx) => {
+                const isSelected = userAnswers[index] === optIdx;
+                
+                const optionBtn = document.createElement('button');
+                optionBtn.type = 'button';
+                optionBtn.onclick = () => selectOption(optIdx);
+                optionBtn.className = `w-full text-left p-4 rounded-xl border-2 transition flex items-start gap-3 ${
+                    isSelected 
+                        ? 'border-indigo-600 bg-indigo-50/80 text-indigo-950 font-semibold shadow-sm' 
+                        : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700'
+                }`;
+
+                const radioCircle = document.createElement('div');
+                radioCircle.className = `w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                    isSelected ? 'border-indigo-600 bg-indigo-600' : 'border-slate-400'
+                }`;
+                if (isSelected) {
+                    radioCircle.innerHTML = '<div class="w-2 h-2 rounded-full bg-white"></div>';
+                }
+
+                const textSpan = document.createElement('span');
+                textSpan.className = "text-sm md:text-base leading-snug";
+                textSpan.innerText = optText;
+
+                optionBtn.appendChild(radioCircle);
+                optionBtn.appendChild(textSpan);
+                container.appendChild(optionBtn);
+            });
+
+            // Update Navigation Buttons State
+            document.getElementById('btn-prev').disabled = index === 0;
+            const nextBtn = document.getElementById('btn-next');
+            if (index === questionsData.length - 1) {
+                nextBtn.innerHTML = 'Selesai <i data-lucide="check" class="w-4 h-4"></i>';
+                nextBtn.onclick = confirmSubmitExam;
+            } else {
+                nextBtn.innerHTML = 'Selanjutnya <i data-lucide="chevron-right" class="w-4 h-4"></i>';
+                nextBtn.onclick = () => navigateQuestion(1);
+            }
+
+            renderNavigationGrid();
+            lucide.createIcons();
+        }
+
+        function selectOption(optionIndex) {
+            userAnswers[currentQuestionIndex] = optionIndex;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function navigateQuestion(direction) {
+            const newIndex = currentQuestionIndex + direction;
+            if (newIndex >= 0 && newIndex < questionsData.length) {
+                loadQuestion(newIndex);
+            }
+        }
+
+        function renderNavigationGrid() {
+            const grid = document.getElementById('navigation-grid');
+            grid.innerHTML = '';
+
+            questionsData.forEach((_, idx) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => loadQuestion(idx);
+
+                const isAnswered = userAnswers[idx] !== null;
+                const isActive = idx === currentQuestionIndex;
+
+                let classNames = "h-10 text-xs font-bold rounded-lg transition border flex items-center justify-center ";
+
+                if (isActive) {
+                    classNames += "bg-indigo-600 text-white border-indigo-700 ring-2 ring-indigo-300 ";
+                } else if (isAnswered) {
+                    classNames += "bg-emerald-500 text-white border-emerald-600 hover:bg-emerald-600 ";
+                } else {
+                    classNames += "bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200 ";
+                }
+
+                btn.className = classNames;
+                btn.innerText = idx + 1;
+                grid.appendChild(btn);
+            });
+        }
+
+        function confirmSubmitExam() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let message = "Apakah Anda yakin ingin menyelesaikan ujian ini?";
+            if (unanswered > 0) {
+                message = `Masih ada ${unanswered} soal yang belum dijawab! Yakin ingin menyelesaikan ujian?`;
+            }
+
+            if (confirm(message)) {
+                submitExam();
+            }
+        }
+
+        function submitExam() {
+            if (examSubmitted) return;
+            examSubmitted = true;
+
+            clearInterval(timerInterval);
+
+            // Calculate Score
+            let correctCount = 0;
+            questionsData.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    correctCount++;
+                }
+            });
+
+            const wrongCount = questionsData.length - correctCount;
+            const finalScore = correctCount * 4; // Each question worth 4 points (25 * 4 = 100)
+
+            // Populate Modal
+            document.getElementById('modal-student-name').innerText = studentData.name;
+            document.getElementById('modal-student-class').innerText = studentData.class;
+            document.getElementById('modal-student-motto').innerText = `"${studentData.motto}"`;
+            document.getElementById('modal-score').innerText = finalScore;
+            document.getElementById('modal-correct-count').innerText = `${correctCount} Soal (+${correctCount * 4} Poin)`;
+            document.getElementById('modal-wrong-count').innerText = `${wrongCount} Soal`;
+
+            // Save final score globally
+            studentData.finalScore = finalScore;
+
+            // Show Result Modal
+            document.getElementById('modal-result').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function sendToWhatsApp() {
+            const teacherPhone = "6285377704248"; // 085377704248 in international format
+            
+            // Text template strictly containing ONLY student credentials and the FINAL SCORE as requested
+            const message = `Halo Bapak Reri Petra Nanda, M.Pd., Gr.,\nBerikut adalah hasil Ujian Mid Semester Biologi Online (Daring Kabut Asap SMA PGRI 2 Jambi):\n\nNama: ${studentData.name}\nKelas: ${studentData.class}\nMotto: ${studentData.motto}\nNilai Akhir: ${studentData.finalScore}/100`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = `https://wa.me/${teacherPhone}?text=${encodedMessage}`;
+
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
